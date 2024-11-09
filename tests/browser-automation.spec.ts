@@ -22,6 +22,6 @@ test("complete browser automation challenges", async ({ page }) => {
     await page.getByText("Click me").click();
   }
 
-  const isCompleted = await page.getByText("Challenge complete!").isVisible();
+  const isCompleted = await page.getByText("Challenge Completed!").isVisible();
   expect(isCompleted).toBeTruthy();
 });
