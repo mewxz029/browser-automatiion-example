@@ -1,6 +1,32 @@
-import { expect, test } from "@playwright/test";
+import {
+  expect,
+  test,
+  chromium,
+  Browser,
+  BrowserContext,
+  Page,
+} from "@playwright/test";
 
-test("complete browser automation challenges", async ({ page }) => {
+let browser: Browser;
+let context: BrowserContext;
+let page: Page;
+
+test.beforeAll(async () => {
+  browser = await chromium.launch({
+    headless: false,
+  });
+
+  context = await browser.newContext();
+  page = await context.newPage();
+});
+
+test.afterAll(async () => {
+  await page.pause();
+  await context.close();
+  await browser.close();
+});
+
+test("complete browser automation challenges", async () => {
   await page.goto("https://browser-automation-challenges-demo.netlify.app/");
 
   // Start Challenge
